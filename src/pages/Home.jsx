@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 
@@ -37,9 +36,9 @@ export default function Home() {
         </button>
       </header>
 
-      {/* WALLET INFO */}
+      {/* WALLET */}
       {wallet && (
-        <div style={{ padding: "0 20px", fontSize: "12px", opacity: 0.7 }}>
+        <div className="walletInfo">
           {wallet.account.address.slice(0, 6)}...
           {wallet.account.address.slice(-4)}
         </div>
@@ -48,19 +47,19 @@ export default function Home() {
       {/* MAIN */}
       <div className="mainLayout">
 
-        {/* CENTER */}
         <div className="centerContent">
           <h1>Launch Tokens on TON</h1>
           <p>Create, fund, and trade community tokens instantly.</p>
 
-          <Link to="/create" className="ctaBtn">
+          <button
+            className="ctaBtn"
+            onClick={() => (window.location.href = "/create")}
+          >
             Create Token
-          </Link>
+          </button>
         </div>
 
-        {/* SIDEBAR */}
         <aside className="sideBar">
-
           <div className="sectionTitle">Trending</div>
           <div className="card">🔥 SEED</div>
           <div className="card">🔥 TONX</div>
@@ -76,15 +75,23 @@ export default function Home() {
               </div>
             ))
           )}
-
         </aside>
+
       </div>
 
       {/* BOTTOM NAV */}
       <footer className="bottomNav">
-        <Link to="/" className="navItem active">Home</Link>
-        <Link to="/create" className="navItem create">Create</Link>
-        <div className="navItem">Profile ▾</div>
+        <button onClick={() => (window.location.href = "/")} className="navBtn">
+          Home
+        </button>
+
+        <button onClick={() => (window.location.href = "/create")} className="navBtn create">
+          Create
+        </button>
+
+        <button onClick={() => (window.location.href = "/profile")} className="navBtn">
+          Profile ▾
+        </button>
       </footer>
 
     </div>
