@@ -10,7 +10,7 @@ export default function Home() {
 
       <main className="hero">
         <h1>Launch Tokens on TON</h1>
-        <p>Decentralized token creation and trading for communities.</p>
+        <p>Create, fund, and trade community tokens instantly.</p>
 
         <div className="actions">
           <Link to="/create" className="primary">Create Token</Link>
