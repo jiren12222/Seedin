@@ -1,47 +1,88 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { supabase } from "../lib/supabase";
+import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 
 export default function Home() {
+  const [tokens, setTokens] = useState([]);
+
+  const [tonConnectUI] = useTonConnectUI();
+  const wallet = useTonWallet();
+
+  useEffect(() => {
+    const fetchTokens = async () => {
+      const { data } = await supabase
+        .from("tokens")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      setTokens(data || []);
+    };
+
+    fetchTokens();
+  }, []);
+
   return (
     <div className="appShell">
 
       {/* TOP BAR */}
       <header className="topBar">
         <div className="logo">Seedin 🌱</div>
-        <button className="walletBtn">Connect Wallet</button>
+
+        <button
+          className="walletBtn"
+          onClick={() => tonConnectUI.openModal()}
+        >
+          {wallet ? "Wallet Connected" : "Connect Wallet"}
+        </button>
       </header>
 
-      {/* MAIN LAYOUT */}
+      {/* WALLET INFO */}
+      {wallet && (
+        <div style={{ padding: "0 20px", fontSize: "12px", opacity: 0.7 }}>
+          {wallet.account.address.slice(0, 6)}...
+          {wallet.account.address.slice(-4)}
+        </div>
+      )}
+
+      {/* MAIN */}
       <div className="mainLayout">
 
-        {/* LEFT CONTENT */}
+        {/* CENTER */}
         <div className="centerContent">
           <h1>Launch Tokens on TON</h1>
-          <p>Create, fund, and trade instantly on-chain.</p>
+          <p>Create, fund, and trade community tokens instantly.</p>
 
           <Link to="/create" className="ctaBtn">
             Create Token
           </Link>
         </div>
 
-        {/* RIGHT SIDEBAR */}
+        {/* SIDEBAR */}
         <aside className="sideBar">
-          <div className="sectionTitle">Trending</div>
 
-          <div className="card">🔥 Token A</div>
-          <div className="card">🔥 Token B</div>
-          <div className="card">🔥 Token C</div>
+          <div className="sectionTitle">Trending</div>
+          <div className="card">🔥 SEED</div>
+          <div className="card">🔥 TONX</div>
 
           <div className="sectionTitle">New Launches</div>
 
-          <div className="card">🆕 Token X</div>
-          <div className="card">🆕 Token Y</div>
-        </aside>
+          {tokens.length === 0 ? (
+            <div className="card">No tokens yet</div>
+          ) : (
+            tokens.map((t) => (
+              <div key={t.id} className="card">
+                🆕 {t.name} ({t.symbol})
+              </div>
+            ))
+          )}
 
+        </aside>
       </div>
 
       {/* BOTTOM NAV */}
       <footer className="bottomNav">
-        <Link to="/" className="navItem">Home</Link>
+        <Link to="/" className="navItem active">Home</Link>
         <Link to="/create" className="navItem create">Create</Link>
         <div className="navItem">Profile ▾</div>
       </footer>

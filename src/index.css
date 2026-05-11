@@ -5,81 +5,67 @@ body {
   color: #eaffea;
 }
 
-/* MAIN WRAPPER */
 .appShell {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: #050607;
 }
 
-/* TOP BAR */
+/* TOP */
 .topBar {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
-  border-bottom: 1px solid #111;
+  padding: 14px;
+  border-bottom: 1px solid #0f1f14;
 }
 
 .logo {
-  font-weight: bold;
   color: #00ff88;
+  font-weight: bold;
 }
 
 .walletBtn {
   background: #00ff88;
   color: black;
   border: none;
-  padding: 8px 14px;
+  padding: 8px 12px;
   border-radius: 10px;
-  font-weight: bold;
 }
 
-/* MAIN LAYOUT */
+/* MAIN */
 .mainLayout {
   display: flex;
-  flex: 1;
   padding: 20px;
+  gap: 20px;
 }
 
-/* CENTER */
 .centerContent {
   flex: 1;
-  padding: 20px;
 }
 
 .centerContent h1 {
-  font-size: 36px;
   color: #00ff88;
 }
 
-.centerContent p {
-  opacity: 0.7;
-}
-
-/* CTA */
 .ctaBtn {
   display: inline-block;
   margin-top: 20px;
   background: #00ff88;
   color: black;
-  padding: 12px 18px;
+  padding: 12px 16px;
   border-radius: 12px;
   text-decoration: none;
-  font-weight: bold;
 }
 
 /* SIDEBAR */
 .sideBar {
   width: 260px;
-  padding: 10px;
-  border-left: 1px solid #111;
 }
 
 .sectionTitle {
-  margin-top: 10px;
-  margin-bottom: 10px;
   color: #00ff88;
-  font-weight: bold;
+  margin: 10px 0;
 }
 
 .card {
@@ -90,13 +76,12 @@ body {
   border: 1px solid #13301f;
 }
 
-/* BOTTOM NAV */
+/* BOTTOM */
 .bottomNav {
   display: flex;
   justify-content: space-around;
   padding: 12px;
-  border-top: 1px solid #111;
-  background: #050607;
+  border-top: 1px solid #0f1f14;
 }
 
 .navItem {
@@ -106,5 +91,4 @@ body {
 
 .create {
   color: #00ff88;
-  font-weight: bold;
 }
